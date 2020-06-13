@@ -3,8 +3,6 @@ from model import model
 from model import conn
 from app import tokenBot
 
-test = 'test'
-
 bot = telebot.TeleBot(tokenBot)
 
 welcomeReplay = '''
