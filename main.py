@@ -11,7 +11,7 @@ welcomeReplay = '''
 hello my name is ucup, my job is manage student data
 you can write any commands bellow and i will do it :
 /showall -*to show all student name in the class*
-/showall *name -*to show all student name in the class*
+/showdetail #name -*to show all student name in the class*
 '''
 
 @bot.message_handler(commands=['start', 'help'])
@@ -37,7 +37,7 @@ def menu_data_siswa(message):
 
 @bot.message_handler(commands=['showdetail'], func=lambda message: True)
 def detail_data_siswa(message):
-    nama = message.text.split('*')
+    nama = message.text.split('#')
     resultSearch = model.searchData(conn, str(nama[1]))
     id = resultSearch[0]
     results = model.showData(conn, str(id))
