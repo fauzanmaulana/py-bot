@@ -6,18 +6,19 @@ class Model:
         self.user = user
         self.password = password
         self.database = database
-        self.cursor = ""
 
     def connection(self):
         return mysql.connector.connect(host=self.host, user=self.user, password=self.password, database=self.database)
 
     
     def selectAll(self, conn):
-        self.cursor = conn
-        print(self.cursor)
+        cursor = conn.cursor()
+        cursor.execute("SELECT nama, umur, ttl FROM students")
+        result = cursor.fetchall()
+        return result
 
 
 model = Model('localhost', 'root', '', 'xirpl1')
 
-conn = model.connection().cursor()
+conn = model.connection()
 

@@ -3,6 +3,8 @@ from model import model
 from model import conn
 from app import tokenBot
 
+test = 'test'
+
 bot = telebot.TeleBot(tokenBot)
 
 welcomeReplay = '''
@@ -16,7 +18,19 @@ def send_welcome(message):
 	bot.reply_to(message, welcomeReplay, parse_mode= 'Markdown')
 
 @bot.message_handler(commands=['showall'])
-def send_all_data(message):
-	bot.reply_to(message, 'ini semua data siswa')
+def menu_data_siswa(message):
+    results = model.selectAll(conn)
+    data = ''
+    no = 0
+    for result in results:
+        no += 1
+        data += str(result) + "\n"
+        data = data.replace('(', str(no) + '. ')
+        data = data.replace(')', '')
+        data = data.replace("'", '')
+        data = data.replace(",", '')
+        print(data)
+
+    bot.reply_to(message, str(data))
 
 bot.polling()
