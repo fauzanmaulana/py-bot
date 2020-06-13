@@ -7,3 +7,5 @@ touch .env
 TOKEN='yourtoken' (inside .env)
 
 source env/bin/activate
+
+python3 main.py
