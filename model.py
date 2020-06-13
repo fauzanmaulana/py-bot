@@ -13,8 +13,20 @@ class Model:
     
     def selectAll(self, conn):
         cursor = conn.cursor()
-        cursor.execute("SELECT nama, umur, ttl FROM students")
+        cursor.execute("SELECT nama FROM students")
         result = cursor.fetchall()
+        return result
+
+    def searchData(self, conn, name):
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM students where nama LIKE " + "'" + name + "'")
+        result = cursor.fetchone()
+        return result
+
+    def showData(self, conn, id):
+        cursor = conn.cursor()
+        cursor.execute("SELECT nama, umur, ttl, alamat FROM students where id = " + id)
+        result = cursor.fetchone()
         return result
 
 
